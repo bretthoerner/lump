@@ -1,7 +1,16 @@
 (ns lump.core
-  (:gen-class))
+  (:gen-class)
+  (:use [compojure.handler :only [site]]
+        [compojure.core :only [defroutes GET POST DELETE ANY]]
+        org.httpkit.server
+        hiccup.core)
+  (:require [cognitect.transit :as transit]))
+
+
+(defroutes routes
+  (GET "/" [] (html [:body [:p "Hello, world."]])))
+
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (run-server (site #'routes) {:port 9090}))
