@@ -1,36 +1,24 @@
 # lump
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+Dorking around with cljs.
 
 ## Usage
 
-FIXME: explanation
+For a browser REPL:
 
-    $ java -jar lump-0.1.0-standalone.jar [args]
+```bash
+$ lein do cljsbuild once, repl
+```
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+```clojure
+(def repl-env (reset! cemerick.austin.repls/browser-repl-env
+                      (cemerick.austin/repl-env)))
+(cemerick.austin.repls/cljs-repl repl-env)
+```
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Brett Hoerner
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
