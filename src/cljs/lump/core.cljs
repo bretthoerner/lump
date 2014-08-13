@@ -10,3 +10,8 @@
 (defn error-test
   []
   (throw "Error"))
+
+
+(defn example-fn
+  [& numbers]
+  (apply + numbers))
