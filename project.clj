@@ -11,6 +11,7 @@
                  [compojure "1.1.8"]
                  [hiccup "1.0.5"]
                  [com.cognitect/transit-clj "0.8.247"]
+                 [com.cognitect/transit-cljs "0.8.178"]
                  [org.clojure/tools.logging "0.3.0"]]
   :hooks [cljx.hooks]
   :main ^:skip-aot lump.core
@@ -40,13 +41,13 @@
                                                        :runner "target/cljs/testable.js"]}
                                :builds {:dev
                                         {:source-paths ["src/cljs" "target/generated/src/cljs"]
-                                         :compiler {:output-dir "resources/public"
-                                                    :output-to "resources/public/app.js"
-                                                    :source-map "resources/public/app.js.map"
-                                                    :optimizations :whitespace
+                                         :compiler {:output-dir "resources/public/js/out"
+                                                    :output-to "resources/public/js/lump.js"
+                                                    :source-map "resources/public/js/lump.js.map"
+                                                    :optimizations :none
                                                     :pretty-print true}}
                                         :test
                                         {:source-paths ["src/cljs" "test/cljs" "target/generated/test/cljs"]
                                          :compiler {:output-to "target/cljs/testable.js"
-                                                    :optimizations :whitespace
+                                                    :optimizations :none
                                                     :pretty-print true}}}}}})

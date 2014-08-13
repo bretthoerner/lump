@@ -14,8 +14,8 @@
   (resources "/")
   (GET "/" []
        (html5 [:head
-               [:script {:src "/goog/base.js" :type "text/javascript"}]
-               [:script {:src "/app.js" :type "text/javascript"}]
+               [:script {:src "js/out/goog/base.js" :type "text/javascript"}]
+               [:script {:src "js/lump.js" :type "text/javascript"}]
                [:script {:type "text/javascript"} "goog.require(\"lump.core\");"]]
               [:body
                [:p "Hello, world."]
