@@ -5,3 +5,8 @@
 (defn hello-world
   []
   (js/alert "Hello, world."))
+
+
+(defn error-test
+  []
+  (throw "Error"))

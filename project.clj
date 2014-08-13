@@ -19,6 +19,8 @@
                    :plugins [[com.cemerick/austin "0.1.3"]
                              [lein-cljsbuild "1.0.3"]]
                    :cljsbuild {:builds [{:source-paths ["src/cljs"]
-                                         :compiler {:output-to "resources/public/app.js"
+                                         :compiler {:output-dir "resources/public"
+                                                    :output-to "resources/public/app.js"
+                                                    :source-map "resources/public/app.js.map"
                                                     :optimizations :simple
                                                     :pretty-print true}}]}}})

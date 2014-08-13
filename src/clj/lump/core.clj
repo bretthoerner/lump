@@ -12,7 +12,9 @@
 (defroutes routes
   (resources "/")
   (GET "/" []
-       (html5 [:head [:script {:src "/app.js" :type "text/javascript"}]]
+       (html5 [:head
+               ;; [:script {:src "/goog/base.js" :type "text/javascript"}]
+               [:script {:src "/app.js" :type "text/javascript"}]]
               [:body
               [:p "Hello, world."]
               (when-let [repl-js (browser-connected-repl-js)]
