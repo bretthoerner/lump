@@ -1,17 +1,7 @@
 (ns lump.core
-  (:require [clojure.browser.repl]))
+  (:require [clojure.browser.repl]
+            [cognitect.transit :as t]))
 
+(enable-console-print!)
 
-(defn hello-world
-  []
-  (js/alert "Hello, world."))
-
-
-(defn error-test
-  []
-  (throw "Error"))
-
-
-(defn example-fn
-  [& numbers]
-  (apply + numbers))
+(def r (t/reader :json))

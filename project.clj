@@ -15,6 +15,7 @@
                  [org.clojure/tools.logging "0.3.0"]]
   :hooks [cljx.hooks]
   :main ^:skip-aot lump.core
+  :jvm-opts ["-Xmx1g"]
   :target-path "target/%s"
   :source-paths ["src/clj" "target/generated/src/clj"] ;; "src/cljs" ?
   :test-paths ["test/clj" "target/generated/test/clj"]
@@ -49,5 +50,4 @@
                                         :test
                                         {:source-paths ["src/cljs" "test/cljs" "target/generated/test/cljs"]
                                          :compiler {:output-to "target/cljs/testable.js"
-                                                    :optimizations :none
-                                                    :pretty-print true}}}}}})
+                                                    :optimizations :whitespace}}}}}})

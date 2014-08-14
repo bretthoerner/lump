@@ -5,6 +5,6 @@
                            :refer (is deftest with-test run-tests testing test-var)])
   #+cljs (:require [cemerick.cljs.test :as t]))
 
-
-(deftest cljx-test
-  (is (= 1 1)))
+(deftest simple
+  (testing "1 + 1 = 2"
+    (is (= 2 (+ 1 1)))))

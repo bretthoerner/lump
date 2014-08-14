@@ -1,9 +1,9 @@
 (ns lump.test
-  (:use [lump.core :only (example-fn)])
   (:require-macros [cemerick.cljs.test
                     :refer (is deftest with-test run-tests testing test-var)])
-  (:require [cemerick.cljs.test :as t]))
+  (:require [cemerick.cljs.test :as t]
+            [lump.core :as lump]))
 
-
-(deftest test-example-fn
-  (is (= 2 (example-fn 1 1))))
+(deftest simple
+  (testing "1 + 1 = 2"
+    (is (= 2 (+ 1 1)))))

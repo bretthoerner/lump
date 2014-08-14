@@ -9,7 +9,6 @@
   (:require [cognitect.transit :as transit]
             [clojure.tools.logging :as log]))
 
-
 (defroutes routes
   (resources "/")
   (GET "/" []
@@ -22,7 +21,6 @@
                (when-let [repl-js (browser-connected-repl-js)]
                  [:script {:type "text/javascript"} repl-js])])))
 
-
 (defn run
   []
   (let [port 9090]
@@ -30,7 +28,6 @@
     (defonce ^:private server
       (run-server (site #'routes) {:port port})))
   server)
-
 
 (defn -main
   [& args]
