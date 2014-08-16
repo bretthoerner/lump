@@ -15,8 +15,10 @@
                  [org.clojure/tools.logging "0.3.0"]
                  [org.clojure/core.async "0.1.319.0-6b1aca-alpha"]
                  [om "0.7.1"]
-                 [ring-transit "0.1.2"]]
-  :hooks [cljx.hooks]
+                 [ring-transit "0.1.2"]
+                 [org.apache.curator/curator-framework "2.6.0"]
+                 [ch.qos.logback/logback-classic "1.1.2"]]
+  ;; :hooks [cljx.hooks]
   :main ^:skip-aot lump.core
   :jvm-opts ["-Xmx1g"]
   :target-path "target/%s"

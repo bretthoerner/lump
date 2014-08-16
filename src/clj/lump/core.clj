@@ -1,5 +1,7 @@
 (ns lump.core
   (:gen-class)
+  (:import (org.apache.curator.framework CuratorFrameworkFactory)
+           (org.apache.curator.retry ExponentialBackoffRetry))
   (:use [compojure.handler :only (site)]
         [compojure.route :refer (resources)]
         [compojure.core :only (defroutes GET POST DELETE ANY)]
@@ -7,11 +9,16 @@
         ring.middleware.transit
         org.httpkit.server
         hiccup.page)
-  (:require [lump.transit :as transit]
-            [clojure.tools.logging :as log]
+  (:require [clojure.tools.logging :as log]
             [ring.util.response :as r]))
 
 (set! *warn-on-reflection* true)
+
+(def zk (CuratorFrameworkFactory/newClient "localhost:2181" (ExponentialBackoffRetry. 1000 3)))
+
+(.start zk)
+
+(defn get-children [path] (.forPath (.getChildren zk) path))
 
 (defn with-content-type [body content-type]
   (r/header (r/response body) "Content-Type" content-type))
@@ -24,11 +31,9 @@
                [:script {:src "js/lump.js" :type "text/javascript"}]
                [:script {:type "text/javascript"} "goog.require(\"lump.core\");"]]
               [:body
-               [:p "Hello, world."]
+               (map #(identity [:p %]) (get-children "/"))
                (when-let [repl-js (browser-connected-repl-js)]
-                 [:script {:type "text/javascript"} repl-js])]))
-  (GET "/transit-example" []
-       (r/response {::foo 1 ::bar (java.util.Date.)})))
+                 [:script {:type "text/javascript"} repl-js])])))
 
 (def app
   (-> routes
