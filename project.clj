@@ -12,12 +12,15 @@
                  [hiccup "1.0.5"]
                  [com.cognitect/transit-clj "0.8.247"]
                  [com.cognitect/transit-cljs "0.8.178"]
-                 [org.clojure/tools.logging "0.3.0"]]
+                 [org.clojure/tools.logging "0.3.0"]
+                 [org.clojure/core.async "0.1.319.0-6b1aca-alpha"]
+                 [om "0.7.1"]
+                 [ring-transit "0.1.2"]]
   :hooks [cljx.hooks]
   :main ^:skip-aot lump.core
   :jvm-opts ["-Xmx1g"]
   :target-path "target/%s"
-  :source-paths ["src/clj" "target/generated/src/clj"] ;; "src/cljs" ?
+  :source-paths ["src/clj" "target/generated/src/clj"]
   :test-paths ["test/clj" "target/generated/test/clj"]
   ;; :resource-paths ["target/generated/src/cljs"]
   :profiles {:uberjar {:aot :all}

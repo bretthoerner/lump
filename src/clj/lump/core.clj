@@ -4,11 +4,14 @@
         [compojure.route :refer (resources)]
         [compojure.core :only (defroutes GET POST DELETE ANY)]
         [cemerick.austin.repls :refer (browser-connected-repl-js)]
+        ring.middleware.transit
         org.httpkit.server
         hiccup.page)
   (:require [lump.transit :as transit]
             [clojure.tools.logging :as log]
             [ring.util.response :as r]))
+
+(set! *warn-on-reflection* true)
 
 (defn with-content-type [body content-type]
   (r/header (r/response body) "Content-Type" content-type))
@@ -25,20 +28,20 @@
                (when-let [repl-js (browser-connected-repl-js)]
                  [:script {:type "text/javascript"} repl-js])]))
   (GET "/transit-example" []
-       (with-content-type
-         (transit/write {::foo 1 ::bar (java.util.Date.)})
-         "application/transit+json"))
-  (GET "/transit-examplev" []
-       (with-content-type
-         (transit/writev {::foo 1 ::bar (java.util.Date.)})
-         "application/json")))
+       (r/response {::foo 1 ::bar (java.util.Date.)})))
+
+(def app
+  (-> routes
+      (wrap-transit-response {:encoding :json, :opts {}})
+      (wrap-transit-body {:keywords? true :opts {}})
+      (wrap-transit-params {:opts {}})))
 
 (defn run
   []
   (let [port 9090]
     (log/info (str "http://localhost:" port "/"))
     (defonce ^:private server
-      (run-server (site #'routes) {:port port})))
+      (run-server (site #'app) {:port port})))
   server)
 
 (defn -main
